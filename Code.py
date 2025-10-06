@@ -16,6 +16,8 @@ key_held_s=False
 key_held_a=False
 key_held_d=False
 
+MAPS=[]
+
 screen.tracer(0)
 
 # getting the coordinates of the cursor
@@ -50,21 +52,27 @@ screen.addshape("Top_right_from_spawn", Shape("image", Top_right_from_spawn))
 
 Above_spawn=Turtle("Above_spawn")
 Above_spawn.ht()
+MAPS.append(Above_spawn)
 
 Below_spawn=Turtle("Below_spawn")
 Below_spawn.ht()
+MAPS.append(Below_spawn)
 
 Left_of_spawn=Turtle("Left_of_spawn")
 Left_of_spawn.ht()
+MAPS.append(Left_of_spawn)
 
 Spawn=Turtle("Spawn")
 Spawn.st()
+MAPS.append(Spawn)
 
 Top_left_from_spawn=Turtle("Top_left_from_spawn")
 Top_left_from_spawn.ht()
+MAPS.append(Top_left_from_spawn)
 
 Top_right_from_spawn=Turtle("Top_right_from_spawn")
 Top_right_from_spawn.ht()
+MAPS.append(Top_right_from_spawn)
 
 map=5
 
@@ -107,20 +115,43 @@ def player_movement():
     if key_held_d:
         player.setx(player.xcor()+10)
 
+def hide_all_maps():
+    for i in MAPS:
+        i.ht()
+
 def map_change(direction):
     global map
     if (direction=="up"):
-        map+=3
+        map-=3
         player.sety(-390)
+    elif (direction=="down"):
+        map+=3
+        player.sety(390)
+    elif (direction=="right"):
+        map+=1
+        player.setx(-750)
+    elif (direction=="left"):
+        map-=1
+        player.setx(750)
 
-    if (map==3):
-        Spawn.ht()
+    hide_all_maps()
+    if (map==1):
+        Top_left_from_spawn.st()
+    elif (map==2):
         Above_spawn.st()
+    elif (map==3):
+        Top_right_from_spawn.st()
+    elif (map==4):
+        Left_of_spawn.st()
+    elif (map==5):
+        Spawn.st()
+    elif (map==8):
+        Below_spawn.st()
 
     return direction
 
-
 def game():
+    global map
     stuff.clear()
     screen.listen()
     screen.onkeypress(press_w, "w")
@@ -135,13 +166,15 @@ def game():
     player_movement()
 
     if (player.ycor()>460):
-        map_change(up)
+        map_change("up")
     if (player.ycor()<-460):
-        map_change(down)
+        map_change("down")
     if (player.xcor()>790):
-        map_change(right)
-    if (player.ycor()<-790):
-        map_change(left)
+        map_change("right")
+    if (player.xcor()<-790):
+        map_change("left")
+
+    stuff.write(map)
 
     screen.update()
     screen.ontimer(game, 20)
