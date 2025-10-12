@@ -24,11 +24,6 @@ screen.tracer(0)
 canvas = turtle.getcanvas()
 x, y = canvas.winfo_pointerx(), canvas.winfo_pointery()
 
-player=turtle.Turtle()
-player.up()
-player.shape("circle")
-player.shapesize(3,3,1)
-
 stuff=turtle.Turtle()
 stuff.ht()
 
@@ -73,6 +68,22 @@ MAPS.append(Top_left_from_spawn)
 Top_right_from_spawn=Turtle("Top_right_from_spawn")
 Top_right_from_spawn.ht()
 MAPS.append(Top_right_from_spawn)
+
+Down1 = PhotoImage(file="./Player/Down1.gif").zoom(6, 6)
+screen.addshape("Down1", Shape("image", Down1))
+Down2 = PhotoImage(file="./Player/Down2.gif").zoom(6, 6)
+screen.addshape("Down2", Shape("image", Down2))
+Down3 = PhotoImage(file="./Player/Down3.gif").zoom(6, 6)
+screen.addshape("Down3", Shape("image", Down3))
+Down4 = PhotoImage(file="./Player/Down4.gif").zoom(6, 6)
+screen.addshape("Down4", Shape("image", Down4))
+Down5 = PhotoImage(file="./Player/Down5.gif").zoom(6, 6)
+screen.addshape("Down5", Shape("image", Down5))
+Down6 = PhotoImage(file="./Player/Down6.gif").zoom(6, 6)
+screen.addshape("Down6", Shape("image", Down6))
+
+player=Turtle("Down1")
+player.up()
 
 map=5
 
@@ -151,7 +162,7 @@ def map_change(direction):
     return direction
 
 def game():
-    global map
+    global map, player
     stuff.clear()
     screen.listen()
     screen.onkeypress(press_w, "w")
@@ -174,8 +185,10 @@ def game():
     if (player.xcor()<-790):
         map_change("left")
 
-    stuff.write(map)
-
+    # n=1
+    # player.shape(globals()[f'Down{n}'])
+    # n=n+1 
+        
     screen.update()
     screen.ontimer(game, 20)
 
