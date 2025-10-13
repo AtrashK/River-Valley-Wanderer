@@ -85,7 +85,7 @@ screen.addshape("Down6", Shape("image", Down6))
 player=Turtle("Down1")
 player.up()
 
-map=5
+map=8
 
 def press_w():
     global key_held_w
@@ -133,10 +133,10 @@ def hide_all_maps():
 def map_change(direction):
     global map
     if (direction=="up"):
-        map-=3
+        map-=5
         player.sety(-390)
     elif (direction=="down"):
-        map+=3
+        map+=5
         player.sety(390)
     elif (direction=="right"):
         map+=1
@@ -146,23 +146,25 @@ def map_change(direction):
         player.setx(750)
 
     hide_all_maps()
-    if (map==1):
+    if (map==2):
         Top_left_from_spawn.st()
-    elif (map==2):
-        Above_spawn.st()
     elif (map==3):
-        Top_right_from_spawn.st()
+        Above_spawn.st()
     elif (map==4):
+        Top_right_from_spawn.st()
+    elif (map==7):
         Left_of_spawn.st()
-    elif (map==5):
-        Spawn.st()
     elif (map==8):
+        Spawn.st()
+    elif (map==13):
         Below_spawn.st()
 
     return direction
 
+n=1
+
 def game():
-    global map, player
+    global map, player, n
     stuff.clear()
     screen.listen()
     screen.onkeypress(press_w, "w")
@@ -185,12 +187,23 @@ def game():
     if (player.xcor()<-790):
         map_change("left")
 
-    # n=1
-    # player.shape(globals()[f'Down{n}'])
-    # n=n+1 
+    if (n%6==1):
+        player.shape("Down1")
+    elif (n%6==2):
+        player.shape("Down2")
+    elif (n%6==3):
+        player.shape("Down3")
+    elif (n%6==4):
+        player.shape("Down4")
+    elif (n%6==5):
+        player.shape("Down5")
+    elif (n%6==6):
+        player.shape("Down6")
+    
+    n+=1
         
     screen.update()
-    screen.ontimer(game, 20)
+    screen.ontimer(game, 300)
 
 game()
 
