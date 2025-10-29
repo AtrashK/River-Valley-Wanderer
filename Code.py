@@ -27,7 +27,7 @@ x, y = canvas.winfo_pointerx(), canvas.winfo_pointery()
 stuff=turtle.Turtle()
 stuff.ht()
 
-Above_spawn = PhotoImage(file="./Maps/Above-spawn-map.gif").zoom(6, 6)
+Above_spawn = PhotoImage(file="./Maps/Above-spawn-map.gif").zoom(screen.window_width()/256, screen.window_height()/256)
 screen.addshape("Above_spawn", Shape("image", Above_spawn))
 
 Below_spawn = PhotoImage(file="./Maps/Below-spawn-map.gif").zoom(6, 6)
@@ -36,7 +36,7 @@ screen.addshape("Below_spawn", Shape("image", Below_spawn))
 Left_of_spawn = PhotoImage(file="./Maps/Left-of-spawn-map.gif").zoom(6, 6)
 screen.addshape("Left_of_spawn", Shape("image", Left_of_spawn))
 
-Spawn = PhotoImage(file="./Maps/Spawn-map.gif").zoom(6, 6)
+Spawn = PhotoImage(file="./Maps/Spawn-map.gif").zoom(8, 8)
 screen.addshape("Spawn", Shape("image", Spawn))
 
 Top_left_from_spawn = PhotoImage(file="./Maps/Top-left-from-spawn-map.gif").zoom(6, 6)
@@ -187,23 +187,8 @@ def game():
     if (player.xcor()<-790):
         map_change("left")
 
-    if (n%6==1):
-        player.shape("Down1")
-    elif (n%6==2):
-        player.shape("Down2")
-    elif (n%6==3):
-        player.shape("Down3")
-    elif (n%6==4):
-        player.shape("Down4")
-    elif (n%6==5):
-        player.shape("Down5")
-    elif (n%6==6):
-        player.shape("Down6")
-    
-    n+=1
-        
     screen.update()
-    screen.ontimer(game, 300)
+    screen.ontimer(game, 30)
 
 game()
 
