@@ -121,13 +121,13 @@ def release_d():
 def player_movement():
     global key_held_w, key_held_s, key_held_a, key_held_d
     if key_held_w:
-        player.sety(player.ycor()+10)
+        player.sety(player.ycor()+((10/6)*esf_y))
     if key_held_s:
-        player.sety(player.ycor()-10)
+        player.sety(player.ycor()-((10/6)*esf_y))
     if key_held_a:
-        player.setx(player.xcor()-10)
+        player.setx(player.xcor()-((10/6)*esf_y))
     if key_held_d:
-        player.setx(player.xcor()+10)
+        player.setx(player.xcor()+((10/6)*esf_y))
 
 def hide_all_maps():
     for i in MAPS:
@@ -189,7 +189,7 @@ def game():
         map_change("right")
     if (player.xcor()<-790):
         map_change("left")
-
+        
     screen.update()
     screen.ontimer(game, 30)
 
