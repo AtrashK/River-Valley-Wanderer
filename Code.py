@@ -27,22 +27,25 @@ x, y = canvas.winfo_pointerx(), canvas.winfo_pointery()
 stuff=turtle.Turtle()
 stuff.ht()
 
-Above_spawn = PhotoImage(file="./Maps/Above-spawn-map.gif").zoom(6, 6)
+esf_x=math.floor(screen.window_width()/256)
+esf_y=math.floor(screen.window_height()/144)
+
+Above_spawn = PhotoImage(file="./Maps/Above-spawn-map.gif").zoom(esf_x, esf_y)
 screen.addshape("Above_spawn", Shape("image", Above_spawn))
 
-Below_spawn = PhotoImage(file="./Maps/Below-spawn-map.gif").zoom(6, 6)
+Below_spawn = PhotoImage(file="./Maps/Below-spawn-map.gif").zoom(esf_x, esf_y)
 screen.addshape("Below_spawn", Shape("image", Below_spawn))
 
-Left_of_spawn = PhotoImage(file="./Maps/Left-of-spawn-map.gif").zoom(6, 6)
+Left_of_spawn = PhotoImage(file="./Maps/Left-of-spawn-map.gif").zoom(esf_x, esf_y)
 screen.addshape("Left_of_spawn", Shape("image", Left_of_spawn))
 
-Spawn = PhotoImage(file="./Maps/Spawn-map.gif").zoom(6, 6)
+Spawn = PhotoImage(file="./Maps/Spawn-map.gif").zoom(esf_x, esf_y)
 screen.addshape("Spawn", Shape("image", Spawn))
 
-Top_left_from_spawn = PhotoImage(file="./Maps/Top-left-from-spawn-map.gif").zoom(6, 6)
+Top_left_from_spawn = PhotoImage(file="./Maps/Top-left-from-spawn-map.gif").zoom(esf_x, esf_y)
 screen.addshape("Top_left_from_spawn", Shape("image", Top_left_from_spawn))
 
-Top_right_from_spawn = PhotoImage(file="./Maps/Top-right-from-spawn-map.gif").zoom(6, 6)
+Top_right_from_spawn = PhotoImage(file="./Maps/Top-right-from-spawn-map.gif").zoom(esf_x, esf_y)
 screen.addshape("Top_right_from_spawn", Shape("image", Top_right_from_spawn))
 
 Above_spawn=Turtle("Above_spawn")
@@ -69,17 +72,17 @@ Top_right_from_spawn=Turtle("Top_right_from_spawn")
 Top_right_from_spawn.ht()
 MAPS.append(Top_right_from_spawn)
 
-Down1 = PhotoImage(file="./Player/Down1.gif").zoom(6, 6)
+Down1 = PhotoImage(file="./Player/Down1.gif").zoom(esf_x, esf_y)
 screen.addshape("Down1", Shape("image", Down1))
-Down2 = PhotoImage(file="./Player/Down2.gif").zoom(6, 6)
+Down2 = PhotoImage(file="./Player/Down2.gif").zoom(esf_x, esf_y)
 screen.addshape("Down2", Shape("image", Down2))
-Down3 = PhotoImage(file="./Player/Down3.gif").zoom(6, 6)
+Down3 = PhotoImage(file="./Player/Down3.gif").zoom(esf_x, esf_y)
 screen.addshape("Down3", Shape("image", Down3))
-Down4 = PhotoImage(file="./Player/Down4.gif").zoom(6, 6)
+Down4 = PhotoImage(file="./Player/Down4.gif").zoom(esf_x, esf_y)
 screen.addshape("Down4", Shape("image", Down4))
-Down5 = PhotoImage(file="./Player/Down5.gif").zoom(6, 6)
+Down5 = PhotoImage(file="./Player/Down5.gif").zoom(esf_x, esf_y)
 screen.addshape("Down5", Shape("image", Down5))
-Down6 = PhotoImage(file="./Player/Down6.gif").zoom(6, 6)
+Down6 = PhotoImage(file="./Player/Down6.gif").zoom(esf_x, esf_y)
 screen.addshape("Down6", Shape("image", Down6))
 
 player=Turtle("Down1")
@@ -115,16 +118,22 @@ def release_d():
     global key_held_d
     key_held_d = False
 
+def boundaries():
+    global map
+    while map==8:
+        return True
+
 def player_movement():
     global key_held_w, key_held_s, key_held_a, key_held_d
-    if key_held_w:
-        player.sety(player.ycor()+10)
-    if key_held_s:
-        player.sety(player.ycor()-10)
-    if key_held_a:
-        player.setx(player.xcor()-10)
-    if key_held_d:
-        player.setx(player.xcor()+10)
+    if boundaries():
+        if key_held_w:
+            player.sety(player.ycor()+((10/6)*esf_y))
+        if key_held_s:
+            player.sety(player.ycor()-((10/6)*esf_y))
+        if key_held_a:
+            player.setx(player.xcor()-((10/6)*esf_x))
+        if key_held_d:
+            player.setx(player.xcor()+((10/6)*esf_x))
 
 def hide_all_maps():
     for i in MAPS:
@@ -187,23 +196,8 @@ def game():
     if (player.xcor()<-790):
         map_change("left")
 
-    if (n%6==1):
-        player.shape("Down1")
-    elif (n%6==2):
-        player.shape("Down2")
-    elif (n%6==3):
-        player.shape("Down3")
-    elif (n%6==4):
-        player.shape("Down4")
-    elif (n%6==5):
-        player.shape("Down5")
-    elif (n%6==6):
-        player.shape("Down6")
-    
-    n+=1
-        
     screen.update()
-    screen.ontimer(game, 300)
+    screen.ontimer(game, 30)
 
 game()
 
