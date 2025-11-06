@@ -194,21 +194,6 @@ def game():
         map_change("right")
     if (player.xcor()<-790):
         map_change("left")
-
-    if (n%6==1):
-        player.shape("Down1")
-    elif (n%6==2):
-        player.shape("Down2")
-    elif (n%6==3):
-        player.shape("Down3")
-    elif (n%6==4):
-        player.shape("Down4")
-    elif (n%6==5):
-        player.shape("Down5")
-    elif (n%6==6):
-        player.shape("Down6")
-    
-    n+=1
         
     screen.update()
     screen.ontimer(game, 30)
