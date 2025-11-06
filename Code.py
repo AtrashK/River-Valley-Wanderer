@@ -125,15 +125,14 @@ def boundaries():
 
 def player_movement():
     global key_held_w, key_held_s, key_held_a, key_held_d
-    if boundaries():
-        if key_held_w:
-            player.sety(player.ycor()+((10/6)*esf_y))
-        if key_held_s:
-            player.sety(player.ycor()-((10/6)*esf_y))
-        if key_held_a:
-            player.setx(player.xcor()-((10/6)*esf_x))
-        if key_held_d:
-            player.setx(player.xcor()+((10/6)*esf_x))
+    if key_held_w:
+        player.sety(player.ycor()+10)
+    if key_held_s:
+        player.sety(player.ycor()-10)
+    if key_held_a:
+        player.setx(player.xcor()-10)
+    if key_held_d:
+        player.setx(player.xcor()+10)
 
 def hide_all_maps():
     for i in MAPS:
@@ -196,6 +195,21 @@ def game():
     if (player.xcor()<-790):
         map_change("left")
 
+    if (n%6==1):
+        player.shape("Down1")
+    elif (n%6==2):
+        player.shape("Down2")
+    elif (n%6==3):
+        player.shape("Down3")
+    elif (n%6==4):
+        player.shape("Down4")
+    elif (n%6==5):
+        player.shape("Down5")
+    elif (n%6==6):
+        player.shape("Down6")
+    
+    n+=1
+        
     screen.update()
     screen.ontimer(game, 30)
 
