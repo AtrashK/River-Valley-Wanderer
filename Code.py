@@ -16,6 +16,8 @@ key_held_s=False
 key_held_a=False
 key_held_d=False
 
+bound=False
+
 MAPS=[]
 
 screen.tracer(0)
@@ -90,6 +92,30 @@ player.up()
 
 map=8
 
+def check_boundaries():
+    global bound
+    if (map==3):
+        if (player.xcor()>=410 and (player.ycor()<=-210 or player.ycor()>=-10)):
+            bound=True
+            if (player.xcor()<650):
+                player.setx(410)
+        else:
+            bound=False
+        
+        if (player.ycor()>=120):
+            player.sety(120)
+            bound=True
+        else:
+            bound=False
+
+    if (map==8):
+        if (player.xcor()>=410):
+            bound=True
+            player.setx(410)
+        else:
+            bound=False
+
+
 def press_w():
     global key_held_w
     key_held_w = True
@@ -112,8 +138,9 @@ def release_a():
     key_held_a = False
 
 def press_d():
-    global key_held_d
-    key_held_d = True
+    global key_held_d, bound
+    if (not bound):
+        key_held_d = True
 def release_d():
     global key_held_d
     key_held_d = False
@@ -174,6 +201,9 @@ n=1
 def game():
     global map, player, n
     stuff.clear()
+
+    check_boundaries()
+
     screen.listen()
     screen.onkeypress(press_w, "w")
     screen.onkeyrelease(release_w, "w")
@@ -195,6 +225,12 @@ def game():
     if (player.xcor()<-790):
         map_change("left")
         
+    if (n%20==0):
+        print("x ="+str(player.xcor()))
+        print("y ="+str(player.ycor()))
+
+    n+=1
+
     screen.update()
     screen.ontimer(game, 30)
 
