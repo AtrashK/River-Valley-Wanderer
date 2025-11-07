@@ -118,16 +118,21 @@ def release_d():
     global key_held_d
     key_held_d = False
 
+def boundaries():
+    global map
+    while map==8:
+        return True
+
 def player_movement():
     global key_held_w, key_held_s, key_held_a, key_held_d
     if key_held_w:
-        player.sety(player.ycor()+((10/6)*esf_y))
+        player.sety(player.ycor()+10)
     if key_held_s:
-        player.sety(player.ycor()-((10/6)*esf_y))
+        player.sety(player.ycor()-10)
     if key_held_a:
-        player.setx(player.xcor()-((10/6)*esf_y))
+        player.setx(player.xcor()-10)
     if key_held_d:
-        player.setx(player.xcor()+((10/6)*esf_y))
+        player.setx(player.xcor()+10)
 
 def hide_all_maps():
     for i in MAPS:
