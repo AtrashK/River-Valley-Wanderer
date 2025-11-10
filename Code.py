@@ -16,7 +16,10 @@ key_held_s=False
 key_held_a=False
 key_held_d=False
 
-bound=False
+bound_w=False
+bound_a=False
+bound_s=False
+bound_d=False
 
 MAPS=[]
 
@@ -93,31 +96,29 @@ player.up()
 map=8
 
 def check_boundaries():
-    global bound
+    global bound_w, bound_a, bound_s, bound_d
     if (map==3):
-        if (player.xcor()>=410 and (player.ycor()<=-210 or player.ycor()>=-10)):
-            bound=True
-            if (player.xcor()<650):
-                player.setx(410)
+        if (player.ycor()>110):
+            bound_w=True
+        elif (player.ycor()>-30 and (player.xcor()>410 and player.xcor()<660)):
+            bound_w=True
         else:
-            bound=False
-        
-        if (player.ycor()>=120):
-            player.sety(120)
-            bound=True
+            bound_w=False
+
+        if (player.xcor()>410 and (player.ycor()>-20 or player.ycor()<-200)):
+            bound_d=True
         else:
-            bound=False
+            bound_d=False
 
     if (map==8):
         if (player.xcor()>=410):
-            bound=True
-            player.setx(410)
+            bound_d=True
         else:
-            bound=False
-
+            bound_d=False
 
 def press_w():
-    global key_held_w
+    global key_held_w, bound
+    check_boundaries()
     key_held_w = True
 def release_w():
     global key_held_w
@@ -138,27 +139,21 @@ def release_a():
     key_held_a = False
 
 def press_d():
-    global key_held_d, bound
-    if (not bound):
-        key_held_d = True
+    global key_held_d
+    key_held_d = True
 def release_d():
     global key_held_d
     key_held_d = False
 
-def boundaries():
-    global map
-    while map==8:
-        return True
-
 def player_movement():
-    global key_held_w, key_held_s, key_held_a, key_held_d
-    if key_held_w:
+    global key_held_w, key_held_s, key_held_a, key_held_d, bound_w, bound_a, bound_s, bound_d
+    if key_held_w and not bound_w:
         player.sety(player.ycor()+10)
-    if key_held_s:
+    if key_held_s and not bound_s:
         player.sety(player.ycor()-10)
-    if key_held_a:
+    if key_held_a and not bound_a:
         player.setx(player.xcor()-10)
-    if key_held_d:
+    if key_held_d and not bound_d:
         player.setx(player.xcor()+10)
 
 def hide_all_maps():
