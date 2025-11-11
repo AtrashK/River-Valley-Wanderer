@@ -103,6 +103,11 @@ def check_boundaries():
         else:
             bound_w=False
 
+        if (player.xcor()<-290):
+            bound_a=True
+        else:
+            bound_a=False
+
     if (map==3):
         if (player.ycor()>110):
             bound_w=True
