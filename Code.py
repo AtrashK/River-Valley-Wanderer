@@ -97,24 +97,61 @@ map=8
 
 def check_boundaries():
     global bound_w, bound_a, bound_s, bound_d
-    if (map==3):
+    if (map==2):
         if (player.ycor()>110):
-            bound_w=True
-        elif (player.ycor()>-30 and (player.xcor()>410 and player.xcor()<660)):
             bound_w=True
         else:
             bound_w=False
 
-        if (player.xcor()>410 and (player.ycor()>-20 or player.ycor()<-200)):
+    if (map==3):
+        if (player.ycor()>110):
+            bound_w=True
+        elif (player.ycor()>-30 and (player.xcor()>410 and player.xcor()<640)):
+            bound_w=True
+        else:
+            bound_w=False
+
+        if (player.ycor()<-190 and (player.xcor()>410 and player.xcor()<640)):
+            bound_s=True
+        else:
+            bound_s=False
+
+        if (player.xcor()>410 and player.xcor()<430 and (player.ycor()>-20 or player.ycor()<-200)):
             bound_d=True
         else:
             bound_d=False
 
+        if (player.xcor()<650 and player.xcor()>630 and (player.ycor()>-20 or player.ycor()<-200)):
+            bound_a=True
+        else:
+            bound_a=False
+
     if (map==8):
-        if (player.xcor()>=410):
+        if (player.xcor()>410):
             bound_d=True
         else:
             bound_d=False
+
+    if (map==13):
+        if (player.ycor()>70 and (player.xcor()>410 and player.xcor()<640)):
+            bound_w=True
+        else:
+            bound_w=False
+
+        if (player.ycor()<-90 and (player.xcor()>410 and player.xcor()<640)):
+            bound_s=True
+        else:
+            bound_s=False
+
+        if (player.xcor()>410 and player.xcor()<430 and (player.ycor()>80 or player.ycor()<-100)):
+            bound_d=True
+        else:
+            bound_d=False
+
+        if (player.xcor()<650 and player.xcor()>630 and (player.ycor()>80 or player.ycor()<-100)):
+            bound_a=True
+        else:
+            bound_a=False
 
 def press_w():
     global key_held_w, bound
