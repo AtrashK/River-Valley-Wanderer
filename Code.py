@@ -32,25 +32,22 @@ x, y = canvas.winfo_pointerx(), canvas.winfo_pointery()
 stuff=turtle.Turtle()
 stuff.ht()
 
-esf_x=math.floor(screen.window_width()/256)
-esf_y=math.floor(screen.window_height()/144)
-
-Above_spawn = PhotoImage(file="./Maps/Above-spawn-map.gif").zoom(esf_x, esf_y)
+Above_spawn = PhotoImage(file="./Maps/Above-spawn-map.gif").zoom(6, 6)
 screen.addshape("Above_spawn", Shape("image", Above_spawn))
 
-Below_spawn = PhotoImage(file="./Maps/Below-spawn-map.gif").zoom(esf_x, esf_y)
+Below_spawn = PhotoImage(file="./Maps/Below-spawn-map.gif").zoom(6, 6)
 screen.addshape("Below_spawn", Shape("image", Below_spawn))
 
-Left_of_spawn = PhotoImage(file="./Maps/Left-of-spawn-map.gif").zoom(esf_x, esf_y)
+Left_of_spawn = PhotoImage(file="./Maps/Left-of-spawn-map.gif").zoom(6, 6)
 screen.addshape("Left_of_spawn", Shape("image", Left_of_spawn))
 
-Spawn = PhotoImage(file="./Maps/Spawn-map.gif").zoom(esf_x, esf_y)
+Spawn = PhotoImage(file="./Maps/Spawn-map.gif").zoom(6, 6)
 screen.addshape("Spawn", Shape("image", Spawn))
 
-Top_left_from_spawn = PhotoImage(file="./Maps/Top-left-from-spawn-map.gif").zoom(esf_x, esf_y)
+Top_left_from_spawn = PhotoImage(file="./Maps/Top-left-from-spawn-map.gif").zoom(6, 6)
 screen.addshape("Top_left_from_spawn", Shape("image", Top_left_from_spawn))
 
-Top_right_from_spawn = PhotoImage(file="./Maps/Top-right-from-spawn-map.gif").zoom(esf_x, esf_y)
+Top_right_from_spawn = PhotoImage(file="./Maps/Top-right-from-spawn-map.gif").zoom(6, 6)
 screen.addshape("Top_right_from_spawn", Shape("image", Top_right_from_spawn))
 
 Above_spawn=Turtle("Above_spawn")
@@ -77,17 +74,17 @@ Top_right_from_spawn=Turtle("Top_right_from_spawn")
 Top_right_from_spawn.ht()
 MAPS.append(Top_right_from_spawn)
 
-Down1 = PhotoImage(file="./Player/Down1.gif").zoom(esf_x, esf_y)
+Down1 = PhotoImage(file="./Player/Down1.gif").zoom(6, 6)
 screen.addshape("Down1", Shape("image", Down1))
-Down2 = PhotoImage(file="./Player/Down2.gif").zoom(esf_x, esf_y)
+Down2 = PhotoImage(file="./Player/Down2.gif").zoom(6, 6)
 screen.addshape("Down2", Shape("image", Down2))
-Down3 = PhotoImage(file="./Player/Down3.gif").zoom(esf_x, esf_y)
+Down3 = PhotoImage(file="./Player/Down3.gif").zoom(6, 6)
 screen.addshape("Down3", Shape("image", Down3))
-Down4 = PhotoImage(file="./Player/Down4.gif").zoom(esf_x, esf_y)
+Down4 = PhotoImage(file="./Player/Down4.gif").zoom(6, 6)
 screen.addshape("Down4", Shape("image", Down4))
-Down5 = PhotoImage(file="./Player/Down5.gif").zoom(esf_x, esf_y)
+Down5 = PhotoImage(file="./Player/Down5.gif").zoom(6, 6)
 screen.addshape("Down5", Shape("image", Down5))
-Down6 = PhotoImage(file="./Player/Down6.gif").zoom(esf_x, esf_y)
+Down6 = PhotoImage(file="./Player/Down6.gif").zoom(6, 6)
 screen.addshape("Down6", Shape("image", Down6))
 
 player=Turtle("Down1")
@@ -98,12 +95,18 @@ map=8
 def check_boundaries():
     global bound_w, bound_a, bound_s, bound_d
     if (map==2):
-        if (player.ycor()>110):
+        if (player.ycor()>290):
+            bound_w=True
+        elif (player.ycor()>110 and player.xcor()>210):
+            bound_w=True
+        elif (player.ycor()>100 and player.xcor()<180 and player.xcor()>-270):
             bound_w=True
         else:
             bound_w=False
 
         if (player.xcor()<-290):
+            bound_a=True
+        elif (player.xcor()<170 and player.ycor()>100):
             bound_a=True
         else:
             bound_a=False
