@@ -141,6 +141,19 @@ def check_boundaries():
         else:
             bound_a=False
 
+    if (map==7):
+        if (player.xcor()<-660):
+            bound_a=True
+        elif (player.xcor()<-290 and player.xcor()>-310 and player.ycor()>-290):
+            bound_a=True
+        else:
+            bound_a=False
+
+        if (player.ycor()<-300):
+            bound_s=True
+        else:
+            bound_s=False
+
     if (map==8):
         if (player.xcor()>410):
             bound_d=True
