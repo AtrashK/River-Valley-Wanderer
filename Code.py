@@ -104,9 +104,16 @@ def check_boundaries():
         else:
             bound_w=False
 
+        if (player.xcor()>200 and player.ycor()>110):
+            bound_d=True
+        elif (player.xcor()>-270 and player.xcor()<-250 and player.ycor()>100):
+            bound_d=True
+        else:
+            bound_d=False
+
         if (player.xcor()<-290):
             bound_a=True
-        elif (player.xcor()<170 and player.ycor()>100):
+        elif (player.xcor()<170 and player.xcor()>150 and player.ycor()>100):
             bound_a=True
         else:
             bound_a=False
