@@ -104,9 +104,16 @@ def check_boundaries():
         else:
             bound_w=False
 
+        if (player.xcor()>-280 and player.xcor()<-260 and player.ycor()>100):
+            bound_d=True
+        elif (player.xcor()>200 and player.xcor()<220 and player.ycor()>110):
+            bound_d=True
+        else:
+            bound_d=False
+
         if (player.xcor()<-290):
             bound_a=True
-        elif (player.xcor()<170 and player.ycor()>100):
+        elif (player.xcor()<180 and player.xcor()>160 and player.ycor()>100):
             bound_a=True
         else:
             bound_a=False
@@ -134,6 +141,24 @@ def check_boundaries():
         else:
             bound_a=False
 
+    if (map==7):
+        if (player.ycor()==-310):
+            bound_s=True
+        else:
+            bound_s=False
+
+        if (player.xcor()==-660):
+            bound_a=True
+        elif (player.xcor()==-300 and player.ycor()>-290):
+            bound_a=True
+        else:
+            bound_a=False
+
+        if (player.ycor()>-310 and player.ycor()<=-290 and player.xcor()<-300):
+            bound_w=True
+        else:
+            bound_w=False
+
     if (map==8):
         if (player.xcor()>410):
             bound_d=True
@@ -146,7 +171,9 @@ def check_boundaries():
         else:
             bound_w=False
 
-        if (player.ycor()<-90 and (player.xcor()>410 and player.xcor()<640)):
+        if (player.ycor()==-310):
+            bound_s=True
+        elif (player.ycor()<-90 and (player.xcor()>410 and player.xcor()<640)):
             bound_s=True
         else:
             bound_s=False
@@ -156,7 +183,9 @@ def check_boundaries():
         else:
             bound_d=False
 
-        if (player.xcor()<650 and player.xcor()>630 and (player.ycor()>80 or player.ycor()<-100)):
+        if (player.xcor()==-660):
+            bound_a=True
+        elif (player.xcor()<650 and player.xcor()>630 and (player.ycor()>80 or player.ycor()<-100)):
             bound_a=True
         else:
             bound_a=False
@@ -265,14 +294,11 @@ def game():
     if (player.xcor()<-790):
         map_change("left")
         
-    if (n%20==0):
-        print("x ="+str(player.xcor()))
-        print("y ="+str(player.ycor()))
-
-    n+=1
-
+    
+    print(player.xcor())
+    print(player.ycor())
     screen.update()
-    screen.ontimer(game, 30)
+    screen.ontimer(game, 20)
 
 game()
 
